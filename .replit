@@ -1,0 +1,2 @@
+language = "python3"
+run = "python nct/level2/unit07.py"
