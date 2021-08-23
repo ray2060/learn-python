@@ -45,19 +45,19 @@ def get_input_value():
     global weight
     weight = float(input('weight(kg)(>0):'))
     global age
-    age = int(input('age(2-100)(integer):'))
+    age = int(input('age(2-60)(integer):'))
     global sex
     sex = input('sex(m or f):')
 
 
-try:    
+try:
     get_input_value()
 except:
     sys.exit('The input values do not meet the requirements!')
-if height <= 0 or weight <= 0 or age < 2 or age > 100 or sex != 'm' or sex != 'f':
+if height <= 0 or weight <= 0 or age < 2 or age > 60 or (sex != 'm' and sex != 'f') or age % 1 != 0:
     sys.exit('The input values do not meet the requirements!')
 BMI = weight / height ** 2
-if age >= 13 and age <= 100:
+if age >= 13 and age <= 60:
     print(assess([18.7, 21.9, 24.4], BMI))
 if sex == 'm':
     print(assess(DICT_MAN[age], BMI))
