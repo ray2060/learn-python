@@ -52,7 +52,7 @@ def get_input_value():
 
 try:
     get_input_value()
-except:
+except ValueError:
     sys.exit('The input values do not meet the requirements!')
 if height <= 0 or weight <= 0 or age < 2 or age > 60 or (sex != 'm' and sex != 'f') or age % 1 != 0:
     sys.exit('The input values do not meet the requirements!')
@@ -63,4 +63,4 @@ if sex == 'm':
     print(assess(DICT_MAN[age], BMI))
 if sex == 'f':
     print(assess(DICT_WOMAN[age], BMI))
-print('BMI:%.2f' % (BMI))
+print('BMI:%.5f' % (BMI))
