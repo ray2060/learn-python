@@ -12,10 +12,10 @@ pic.set_colorkey(colorkey)
 picx = 0
 picy = 0
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 timer = pg.time.Clock()
 speedx = 3
 speedy = 3
-WHITE = (255, 255, 255)
 pw = 200
 ph = 25
 px = 300
