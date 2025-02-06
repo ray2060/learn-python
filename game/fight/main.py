@@ -104,7 +104,7 @@ SKLCD = {
         5 : 37,  
         6 : 15, 
         7 : 17, 
-        8 : 21,
+        8 : 1, # 21
         9 : 43,
         10 : 64
     }
@@ -314,19 +314,19 @@ class Player:
     def check(self):
         ret = ''
         if 1 in self.state and self.hp > 0:
-            attk = randint(17, 25) * self.state.count(1)
+            attk = randint(55, 70) * self.state.count(1)
             self.hp -= attk
             ret += f'{self.name} 中毒了，受到伤害 {attk} 点。\n'
             self.sy.append('中毒')
             SH['毒药'] += attk
         if 3 in self.state and self.hp > 0:
-            attk = randint(12, 20) * self.state.count(3)
+            attk = randint(5, 8) * self.state.count(3)
             self.hp -= attk
             ret += f'{self.name} 感受到了震动，受到伤害 {attk} 点。\n'
             self.sy.append('震动')
             SH['震动'] += attk
         if 6 in self.state and self.hp > 0:
-            detk = randint(20, 32) * self.state.count(6)
+            detk = randint(11, 23) * self.state.count(6)
             self.hp += detk
             ret += f'{self.name} 回血 {detk} 点\n'
         if (randint(1, 5) <= 2) and self.hp > 0:
@@ -358,7 +358,7 @@ class Player:
             return f'{self.name} 被' + STTPMP[stt] + '了\n'
         elif stt == 3:
             if randint(1, 10) == 7:
-                x = randint(2, 4)
+                x = randint(1, 3)
                 for i in range(x):
                     self.state.append(stt)
                 return f'{self.name} 遇到了非常强的' + STTPMP[stt] + '\n'
@@ -449,17 +449,21 @@ class Player:
             self.points += 1
         elif skill == 8:
             attk = ceil(self.atk * 2.81)
-            for i in dp:
+            dpts = []
+            for i in range(25):
+                dpts.append(dp[randint(0, len(dp) - 1)])
+            for i in dpts:
                 if lst[int(i) - 1].d:
                     ret += str(lst[int(i) - 1].name) + ' 已经死亡。\n'
                     continue
-                k = randint(1, 6)
-                itk = attk // len(dp) + k
+                k = randint(0, 20)
+                itk = attk // 25 + k
                 lst[int(i) - 1].hp -= itk
                 ret += str(lst[int(i) - 1].name) + '受到' + str(itk) + '点伤害。\n'
                 lst[int(i) - 1].sy.append('地震')
                 SH['地震'] += attk // len(dp) + k
-                ret += lst[int(i) - 1].add_state(3)
+                if randint(1, 10) == 8:
+                    ret += lst[int(i) - 1].add_state(3)
             self.score += 1140 + attk
             self.points += 3
         elif skill == 9:
